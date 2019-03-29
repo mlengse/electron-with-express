@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(20)
   },
   title: {
-    fontSize: 34
+    fontSize: 44
   }
 }));
 
@@ -37,6 +37,7 @@ function Index(props: IndexProps) {
   const handleClose = () => {
     setState(false);
   };
+
   const handleClick = () => {
     if (props.socket) {
       props.socket.emit("button-click");

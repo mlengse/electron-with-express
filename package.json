@@ -9,12 +9,16 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": ".\\node.exe start-electron.js"
+    "start": ".\\content\\node.exe ./start-electron.js"
   },
   "dependencies": {
-    "electron": "latest",
+    "electron": "^5.0.0-beta.7",
     "lodash": "^4.17.11",
     "request": "^2.88.0",
-    "strip": "^3.0.0"
+    "strip": "^3.0.0",
+    "tree-kill": "^1.2.1"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.1"
   }
 }

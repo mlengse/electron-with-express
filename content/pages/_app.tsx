@@ -48,7 +48,7 @@ class MyApp extends App {
         </Head>
         {/* Wrap every page in Styles and Theme providers */}
         <StylesProvider
-          generateClassName={this.pageContext.generateClassName}
+          //generateClassName={this.pageContext.generateClassName}
           sheetsRegistry={this.pageContext.sheetsRegistry}
           sheetsManager={this.pageContext.sheetsManager}
         >

@@ -2,8 +2,8 @@ import green from "@material-ui/core/colors/green";
 import purple from "@material-ui/core/colors/purple";
 import { createMuiTheme, Theme } from "@material-ui/core/styles";
 import { MuiThemeProviderProps } from "@material-ui/core/styles/MuiThemeProvider";
-import { createGenerateClassName } from "@material-ui/styles";
-import { GenerateClassName, SheetsRegistry } from "jss";
+// import { createGenerateClassName } from "@material-ui/styles";
+import { /*GenerateClassName,*/ SheetsRegistry } from "jss";
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -24,7 +24,7 @@ const theme = createMuiTheme({
 
 export interface PageContext extends MuiThemeProviderProps {
   theme: Theme;
-  generateClassName: GenerateClassName<string>; // not sure what goes here
+  //generateClassName: GenerateClassName<string>; // not sure what goes here
   sheetsRegistry: SheetsRegistry;
   sheetsManager: Map<any, any>;
 }
@@ -35,9 +35,9 @@ export default function(): PageContext {
     // This is needed in order to deduplicate the injection of CSS in the page.
     sheetsManager: new Map(),
     // This is needed in order to inject the critical CSS.
-    sheetsRegistry: new SheetsRegistry(),
+    sheetsRegistry: new SheetsRegistry()
     // The standard class name generator.
-    generateClassName: createGenerateClassName()
+    //generateClassName: createGenerateClassName()
     //children: undefined
   };
 }
