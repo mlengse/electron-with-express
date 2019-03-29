@@ -11,9 +11,9 @@ function createWindow() {
     height: 480
   });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
   mainWindow.on("close", () => {
-    mainWindow.webContents.send("stop-server");
+    //mainWindow.webContents.send("stop-server");
   });
   mainWindow.on("closed", () => {
     mainWindow = null;
