@@ -1,3 +1,3 @@
 const electron = require("electron"),
-  proc = require("child_process"),
-  child = proc.spawn(electron, ["."]);
+  spawn = require("child_process").spawn,
+  child = spawn(electron, [`${__dirname}\\..\\`]);

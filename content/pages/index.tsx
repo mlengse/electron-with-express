@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(20)
   },
   title: {
-    fontSize: 44
+    fontSize: 24
   }
 }));
 
@@ -59,7 +59,9 @@ function Index(props: IndexProps) {
           </Button>
         </DialogActions>
       </Dialog>
-      <Typography className={classes.title}>Material-UI</Typography>
+      <Typography className={classes.title}>
+        Next.js/TypeScript/Custom Express Server/Material-UI
+      </Typography>
       <Button variant="contained" color="primary" onClick={handleClick}>
         Click Me
       </Button>

@@ -1,19 +1,106 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Electron with Next/Express</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./app.css" />
-  </head>
 
-  <body>
-    <div id="loading">
-      <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-    </div>
-    <iframe id="expressApp" class="expressApp"></iframe>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Electron-With-Next-Express</title>
+
+  <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+
+  <style>
+    html,
+    body {
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    #loading {
+      position: absolute;
+      width: 100%;
+      top: 45%;
+      text-align: center;
+    }
+
+    .nextExpressApp {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loading">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+  </div>
+  <iframe id="nextExpressApp" class="nextExpressApp" frameborder="0"></iframe>
+
+  <script>
+    const request = require("request");
+    const expressAppUrl = `http://127.0.0.1:${process.env.PORT || 3000}`;
+
+    // const node = spawn(".\\node.exe", [".next/server"], {
+    //   cwd: `${process.cwd()}\\content`
+    // });
+
+    // DEV
+    // ts-node --project tsconfig.server.json server/index.ts
+    // const node = spawn(
+    //   "ts-node",
+    //   ["--project", "tsconfig.server.json", "server/index.ts"],
+    //   {
+    //     cwd: `${process.cwd()}\\content`,
+    //     shell: true
+    //   }
+    // );
+    // const _ = require("lodash");
+    // const spawn = require("child_process").spawn;
+    // const node = spawn("nodemon", [], {
+    //   cwd: `${process.cwd()}\\content`,
+    //   shell: true
+    // });
+
+    // function strip(s) {
+    //   // regex from: http://stackoverflow.com/a/29497680/170217
+    //   return s.replace(
+    //     /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
+    //     ""
+    //   );
+    // }
+
+    // function redirectOutput(x) {
+    //   let lineBuffer = "";
+
+    //   x.on("data", function(data) {
+    //     lineBuffer += data.toString();
+    //     let lines = lineBuffer.split("\n");
+
+    //     _.forEach(lines, l => {
+    //       if (l !== "") {
+    //         console.log(strip(l));
+    //       }
+    //     });
+
+    //     lineBuffer = lines[lines.length - 1];
+    //   });
+    // }
+
+    // redirectOutput(node.stdout);
+    // redirectOutput(node.stderr);
+
+    let checkServerRunning = setInterval(() => {
+      request(expressAppUrl, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+          const app = document.getElementById("nextExpressApp");
+          app.setAttribute("src", expressAppUrl);
+          document.getElementById("loading").style.display = "none";
+          app.style.display = "block";
+          clearInterval(checkServerRunning);
+        }
+      });
+    }, 1000);
+  </script>
+</body>
+
 </html>

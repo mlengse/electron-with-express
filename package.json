@@ -2,19 +2,20 @@
   "name": "electron-with-next-and-express",
   "description": "An Electron starter project which serves it's content via Next/Express",
   "version": "0.12.0",
-  "main": "main.js",
+  "main": "electron\\main.js",
   "authors": [
     "Frank Hale <frankhale@gmail.com>"
   ],
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": ".\\content\\node.exe ./start-electron.js"
+    "start": ".\\content\\node.exe ./electron/start-electron.js"
   },
   "dependencies": {
     "electron": "^5.0.0-beta.7",
     "lodash": "^4.17.11",
     "request": "^2.88.0",
+    "socket.io": "^2.2.0",
     "strip": "^3.0.0",
     "tree-kill": "^1.2.1"
   },

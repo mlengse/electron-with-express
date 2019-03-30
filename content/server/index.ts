@@ -2,18 +2,17 @@ import * as express from "express";
 import * as next from "next";
 import * as io from "socket.io";
 
-const webserver_port = parseInt(process.env.PORT, 10) || 3000;
-const socketio_port = parseInt(process.env.SOCKETIO_PORT, 10) || 3001;
-
-const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const webserver_port = parseInt(process.env.PORT, 10) || 3000,
+  socketio_port = parseInt(process.env.SOCKETIO_PORT, 10) || 3001,
+  dev = process.env.NODE_ENV !== "production",
+  app = next({ dev }),
+  handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
   const socketio = io().listen(socketio_port);
 
-  socketio.on("connection", (s: io.socket) => {
+  socketio.on("connection", (s: io.Socket) => {
     console.log("socket.io connection established");
 
     s.on("foobar", () => {
