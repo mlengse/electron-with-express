@@ -6,7 +6,6 @@ for communication between the front end and backend.
 Project Layout
 
 - content : This is the Next.js application
-  - NOTE: need to
 - electron : Contains the bootstrap code to get Electron up and running
 
 ## Status

@@ -13,7 +13,6 @@ export type AppState = {
 
 class MyApp extends App {
   state = {
-    foo: "Hello, World!",
     socket: null
   };
 
@@ -35,7 +34,6 @@ class MyApp extends App {
   }
 
   componentWillUnmount() {
-    console.log("Unmounting and closing socket");
     this.state.socket.close();
   }
 
@@ -59,12 +57,7 @@ class MyApp extends App {
             <CssBaseline />
             {/* Pass pageContext to the _document though the renderPage enhancer
                 to render collected styles on server side. */}
-            <Component
-              pageContext={this.pageContext}
-              {...pageProps}
-              foo={this.state.foo}
-              socket={this.state.socket}
-            />
+            <Component pageContext={this.pageContext} {...pageProps} socket={this.state.socket} />
           </ThemeProvider>
         </StylesProvider>
       </Container>

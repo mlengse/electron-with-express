@@ -1,70 +1,96 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
 import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+
 import io from "socket.io-client";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(_theme => ({
   root: {
-    textAlign: "center",
-    paddingTop: theme.spacing(20)
+    flexGrow: 1
+  },
+  card: {
+    marginLeft: 10,
+    marginTop: 10,
+    width: 225
+  },
+  grow: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
+  },
+  helloWorldButton: {
+    marginTop: 10,
+    marginLeft: 10
   },
   title: {
-    fontSize: 24
+    fontSize: 14
   }
 }));
 
-type IndexProps = {
-  foo: string;
+type DefaultProps = {
   socket: io.socket;
 };
 
-function Index(props: IndexProps) {
+function About(props: DefaultProps) {
   const classes = useStyles({});
-  const [open, setState] = useState(false);
 
   useEffect(() => {
     if (props.socket) {
       props.socket.emit("foobar");
     }
-  }, [props.socket]);
+  }, []);
 
-  const handleClose = () => {
-    setState(false);
-  };
-
-  const handleClick = () => {
+  const onClickMeClicked = useCallback(() => {
     if (props.socket) {
-      props.socket.emit("button-click");
+      props.socket.emit("foobar");
     }
+  }, []);
 
-    setState(true);
-  };
+  return (
+    <Card className={classes.card}>
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          This is a material-ui card
+        </Typography>
+        <Typography variant="h5" component="h2">
+          Hello, World
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button onClick={onClickMeClicked} className={classes.helloWorldButton} size="small">
+          Click Me
+        </Button>
+      </CardActions>
+    </Card>
+  );
+}
+
+function Index(props: DefaultProps) {
+  const classes = useStyles({});
 
   return (
     <div className={classes.root}>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Hello, World!</DialogTitle>
-        <DialogContent>
-          <DialogContentText>This is a Material-UI Dialog</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button color="primary" onClick={handleClose}>
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Typography className={classes.title}>
-        Next.js/TypeScript/Custom Express Server/Material-UI
-      </Typography>
-      <Button variant="contained" color="primary" onClick={handleClick}>
-        Click Me
-      </Button>
+      <AppBar position="static" color="primary">
+        <Toolbar>
+          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" color="inherit" className={classes.grow}>
+            Electron/Next/Express/Socket.IO/TypeScript
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <About {...props} />
     </div>
   );
 }

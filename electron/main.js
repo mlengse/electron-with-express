@@ -20,7 +20,7 @@ function startSocketIOServer() {
 function startNextServer() {
   // "C:\\Users\\frank\\AppData\\Roaming\\npm\\nodemon.cmd
   // "yarn", ["run", "dev"]
-  nextServerProcess = spawn("yarn", ["run", "start"], {
+  nextServerProcess = spawn("yarn", ["run", "dev"], {
     cwd: `${process.cwd()}\\content`,
     shell: true,
     //env: process.env,

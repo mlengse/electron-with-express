@@ -1,5 +1,5 @@
-import green from "@material-ui/core/colors/green";
-import purple from "@material-ui/core/colors/purple";
+import blue from "@material-ui/core/colors/blue";
+import grey from "@material-ui/core/colors/grey";
 import { createMuiTheme, Theme } from "@material-ui/core/styles";
 import { MuiThemeProviderProps } from "@material-ui/core/styles/MuiThemeProvider";
 // import { createGenerateClassName } from "@material-ui/styles";
@@ -10,14 +10,14 @@ import { /*GenerateClassName,*/ SheetsRegistry } from "jss";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: purple[300],
-      main: purple[500],
-      dark: purple[700]
+      light: blue[300],
+      main: blue[500],
+      dark: blue[700]
     },
     secondary: {
-      light: green[300],
-      main: green[500],
-      dark: green[700]
+      light: grey[300],
+      main: grey[500],
+      dark: grey[700]
     }
   }
 });
