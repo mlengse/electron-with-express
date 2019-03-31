@@ -1,7 +1,9 @@
-# electron-with-express
+# electron-with-next-and-express
 
 This is an Electron starter project that serves it's content from Next.js with a custom Express server. In addition to that a Socket.IO server is set up to allow
 for communication between the front end and backend.
+
+This rewrite is being tracked in issue #21
 
 Project Layout
 
