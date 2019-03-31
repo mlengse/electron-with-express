@@ -10,6 +10,13 @@ Project Layout
 - content : This is the Next.js application
 - electron : Contains the bootstrap code to get Electron up and running
 
+This project is a conglomeration of other example projects:
+
+- https://github.com/mui-org/material-ui/tree/next/examples/nextjs-next-with-typescript
+- https://github.com/zeit/next.js/tree/canary/examples/custom-server-typescript
+- https://github.com/zeit/next.js/tree/canary/examples/custom-server-express
+- https://github.com/zeit/next.js/tree/canary/examples/with-socket.io
+
 ## Status
 
 This is still very much a work in progress and is extremely brittle.
