@@ -1,6 +1,21 @@
 import * as express from "express";
 import * as next from "next";
 import * as io from "socket.io";
+import * as winston from "winston";
+const process = require("process");
+
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.json(),
+  defaultMeta: { service: "socketio-service" },
+  transports: [new winston.transports.File({ filename: "socketio.log" })]
+});
+
+logger.add(
+  new winston.transports.Console({
+    format: winston.format.simple()
+  })
+);
 
 const webserver_port = parseInt(process.env.PORT, 10) || 3000,
   socketio_port = parseInt(process.env.SOCKETIO_PORT, 10) || 3001,
@@ -12,15 +27,22 @@ app.prepare().then(() => {
   const server = express();
   const socketio = io().listen(socketio_port);
 
-  socketio.on("connection", (s: io.Socket) => {
+  socketio.on("connection", (s: SocketIO.Socket) => {
     console.log("socket.io connection established");
+    logger.info("socket.io connection established");
+
+    setInterval(() => {
+      s.emit("ping", { data: "ping from io server" });
+    }, 2000);
 
     s.on("foobar", () => {
-      console.log("recieved a foobar message");
+      console.log("received a foobar message...");
+      logger.info("received a foobar message...");
     });
 
     s.on("button-click", () => {
-      console.log("recieved a menu click message");
+      console.log("received a menu click message...");
+      logger.info("received a menu click message...");
     });
   });
 

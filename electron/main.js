@@ -1,17 +1,17 @@
 const electron = require("electron"),
   app = electron.app,
   BrowserWindow = electron.BrowserWindow,
-  kill = require("tree-kill"),
+  psTree = require("ps-tree"),
   spawn = require("child_process").spawn,
   io = require("socket.io"),
   _ = require("lodash"),
-  socketio_port = parseInt(process.env.SOCKETIO_ELECTRON_PORT, 10) || 3002;
+  socketio_electron_port =
+    parseInt(process.env.SOCKETIO_ELECTRON_PORT, 10) || 3002;
 
-let nextServerProcess,
-  nextServerLog = [];
+let nextServerLog = [];
 
 function startSocketIOServer() {
-  const socketio = io().listen(socketio_port);
+  const socketio = io().listen(socketio_electron_port);
   socketio.on("connection", s => {
     console.log("connected to socket.io server in Electron's main process");
   });
@@ -20,13 +20,26 @@ function startSocketIOServer() {
 function startNextServer() {
   // "C:\\Users\\frank\\AppData\\Roaming\\npm\\nodemon.cmd
   // "yarn", ["run", "dev"]
-  nextServerProcess = spawn("yarn", ["run", "dev"], {
-    cwd: `${process.cwd()}\\content`,
-    shell: true,
-    //env: process.env,
-    detached: true,
-    windowsHide: true
-  });
+  // .\node.exe node_modules\next\dist\bin\next
+  // ".\\node.exe",
+  // ["node_modules\\next\\dist\\bin\\next"],
+  // ts-node --project tsconfig.server.json server/index.ts
+  const nextServerProcess = spawn(
+    ".\\node.exe",
+    [
+      "node_modules\\ts-node\\dist\\bin.js",
+      "--project",
+      "tsconfig.server.json",
+      "server/index.ts"
+    ],
+    {
+      cwd: `${process.cwd()}\\content`,
+      //shell: true,
+      env: process.env
+      //detached: true,
+      //windowsHide: true
+    }
+  );
 
   function strip(s) {
     // regex from: http://stackoverflow.com/a/29497680/170217
@@ -55,9 +68,11 @@ function startNextServer() {
 
   redirectOutput(nextServerProcess.stdout);
   redirectOutput(nextServerProcess.stderr);
+
+  return nextServerProcess;
 }
 
-function initializeElectron() {
+function initializeElectron(nextServerProcess) {
   let mainWindow;
 
   function createWindow() {
@@ -71,32 +86,32 @@ function initializeElectron() {
     });
     mainWindow.loadURL(`file://${__dirname}/index.html`);
     mainWindow.webContents.openDevTools();
-    mainWindow.on("close", () => {
-      if (nextServerProcess) {
-        kill(nextServerProcess.pid);
-      }
-    });
     mainWindow.on("closed", () => {
       mainWindow = null;
     });
   }
 
   app.on("ready", createWindow);
-  app.on("browser-window-created", function(e, window) {
+  app.on("browser-window-created", (e, window) => {
     window.setMenu(null);
   });
-  app.on("window-all-closed", function() {
+  app.on("window-all-closed", () => {
+    psTree(nextServerProcess.pid, function(err, children) {
+      children.map(function(p) {
+        process.kill(p.PID);
+      });
+    });
+
     if (process.platform !== "darwin") {
       app.quit();
     }
   });
-  app.on("activate", function() {
+  app.on("activate", () => {
     if (mainWindow === null) {
       createWindow();
     }
   });
 }
 
-startNextServer();
 startSocketIOServer();
-initializeElectron();
+initializeElectron(startNextServer());
