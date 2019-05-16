@@ -1,7 +1,7 @@
 {
   "name": "content",
   "description": "A Next/Express app that serves content for our app",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "dev": "nodemon",
@@ -9,9 +9,11 @@
     "start": "cross-env NODE_ENV=production .\\node.exe .next/server"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.2",
     "@material-ui/core": "next",
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "next",
+    "@zeit/next-css": "^1.0.1",
     "@zeit/next-typescript": "latest",
     "express": "^4.16.4",
     "jss": "9.8.7",

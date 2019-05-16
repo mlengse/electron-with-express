@@ -1,7 +1,7 @@
 {
   "name": "electron-with-next-and-express",
   "description": "An Electron starter project which serves it's content via Next/Express",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "main": "electron\\main.js",
   "authors": [
     "Frank Hale <frankhale@gmail.com>"

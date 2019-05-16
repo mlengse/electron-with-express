@@ -1,12 +1,22 @@
-import React, { useState, useEffect, useCallback } from "react";
-//import Button from "@material-ui/core/Button";
+import React, { useState, /*useEffect,*/ useCallback } from "react";
+import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Theme } from "@material-ui/core";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+import {
+  Typography,
+  Theme,
+  ListItemText,
+  ListItemIcon,
+  ListItem,
+  List,
+  Paper,
+  Icon,
+  IconButton,
+  Toolbar,
+  AppBar
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import Paper from "@material-ui/core/Paper";
+
+// import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -44,6 +54,8 @@ type DefaultProps = {
 export default function App(props: DefaultProps) {
   const classes = useStyles();
 
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
   const onMenuButtonClicked = useCallback(() => {
     if (props.socket) {
       console.log("sending a button-click message");
@@ -52,8 +64,14 @@ export default function App(props: DefaultProps) {
       props.socket.on("ping", (data: any) => {
         console.log(data);
       });
+
+      toggleDrawer();
     }
   }, [props.socket]);
+
+  const toggleDrawer = useCallback(() => {
+    setDrawerOpen(!drawerOpen);
+  }, [drawerOpen]);
 
   // const onClickMeClicked = useCallback(() => {
   //   if (props.socket) {
@@ -79,6 +97,16 @@ export default function App(props: DefaultProps) {
           </Typography>
         </Toolbar>
       </AppBar>
+      <Drawer open={drawerOpen} onClose={toggleDrawer}>
+        <List>
+          <ListItem button key="Something">
+            <ListItemIcon>
+              <Icon className="fas fa-list" />
+            </ListItemIcon>
+            <ListItemText primary="Something" />
+          </ListItem>
+        </List>
+      </Drawer>
       <Paper className={classes.message}>
         <Typography variant="h5" component="h3">
           Welcome!

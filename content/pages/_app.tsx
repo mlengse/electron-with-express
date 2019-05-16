@@ -2,19 +2,17 @@ import React from "react";
 import App, { Container } from "next/app";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/styles";
-//import { createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-//import red from "@material-ui/core/colors/red";
 import * as io from "socket.io-client";
 import theme from "../src/theme";
 
 export type AppState = {
-  socket?: SocketIOClient.Socket | null;
+  socket?: SocketIOClient.Socket;
 };
 
 class MyApp extends App {
   state = {
-    socket: null
+    socket: {} as SocketIOClient.Socket
   };
 
   componentDidMount() {
@@ -44,9 +42,6 @@ class MyApp extends App {
 
     return (
       <Container>
-        <Head>
-          <title>My page</title>
-        </Head>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
