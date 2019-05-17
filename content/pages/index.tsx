@@ -9,14 +9,14 @@ import {
   ListItem,
   List,
   Paper,
-  Icon,
   IconButton,
   Toolbar,
   AppBar
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
-// import "@fortawesome/fontawesome-free/css/all.min.css";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faList } from "@fortawesome/free-solid-svg-icons";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   message: {
     margin: theme.spacing(3, 2),
     padding: theme.spacing(3, 2)
+  },
+  list: {
+    width: 250
   }
 }));
 
@@ -98,14 +101,23 @@ export default function App(props: DefaultProps) {
         </Toolbar>
       </AppBar>
       <Drawer open={drawerOpen} onClose={toggleDrawer}>
-        <List>
-          <ListItem button key="Something">
-            <ListItemIcon>
-              <Icon className="fas fa-list" />
-            </ListItemIcon>
-            <ListItemText primary="Something" />
-          </ListItem>
-        </List>
+        <div className={classes.list}>
+          <List>
+            <ListItem button key="barfoo">
+              <ListItemIcon>
+                <i className="material-icons">book</i>
+              </ListItemIcon>
+              <ListItemText primary="barfoo" />
+            </ListItem>
+
+            <ListItem button key="foobar">
+              <ListItemIcon>
+                <i className="material-icons">info</i>
+              </ListItemIcon>
+              <ListItemText primary="foobar" />
+            </ListItem>
+          </List>
+        </div>
       </Drawer>
       <Paper className={classes.message}>
         <Typography variant="h5" component="h3">
