@@ -2,7 +2,7 @@ import React from "react";
 import App, { Container } from "next/app";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import * as io from "socket.io-client";
+import io from "socket.io-client";
 import theme from "../src/theme";
 
 export type AppState = {

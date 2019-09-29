@@ -1,7 +1,7 @@
-import * as express from "express";
-import * as next from "next";
-import * as io from "socket.io";
-import * as winston from "winston";
+import next from "next";
+import express from "express";
+import io from "socket.io";
+import winston from "winston";
 const process = require("process");
 
 const logger = winston.createLogger({
@@ -25,7 +25,7 @@ const webserver_port = parseInt(process.env.PORT, 10) || 3000,
 
 app.prepare().then(() => {
   const server = express();
-  const socketio = io().listen(socketio_port);
+  const socketio = io.listen(socketio_port);
 
   socketio.on("connection", (s: SocketIO.Socket) => {
     console.log("socket.io connection established");
