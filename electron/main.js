@@ -5,8 +5,7 @@ const electron = require("electron"),
   spawn = require("child_process").spawn,
   io = require("socket.io"),
   _ = require("lodash"),
-  socketio_electron_port =
-    parseInt(process.env.SOCKETIO_ELECTRON_PORT, 10) || 3002;
+  socketio_electron_port = parseInt(process.env.SOCKETIO_ELECTRON_PORT, 10) || 3002;
 
 let nextServerLog = [];
 
@@ -31,11 +30,17 @@ function startNextServer() {
       "--project",
       "tsconfig.server.json",
       "server/index.ts"
+      // PROD:
+      // cross-env NODE_ENV=production .\\node.exe .next/server
+      //".next/server"
     ],
     {
       cwd: `${process.cwd()}\\content`,
       //shell: true,
       env: process.env
+      // env: {
+      //   NODE_ENV=production
+      // }
       //detached: true,
       //windowsHide: true
     }
@@ -85,7 +90,7 @@ function initializeElectron(nextServerProcess) {
       }
     });
     mainWindow.loadURL(`file://${__dirname}/index.html`);
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
     mainWindow.on("closed", () => {
       mainWindow = null;
     });

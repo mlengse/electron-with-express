@@ -1,58 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Electron-With-Next-Express</title>
 
-    <link
-      rel="stylesheet"
-      href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <title>Electron-With-Nextjs-Custom-Express-Server</title>
 
-    <style>
-      html,
-      body {
-        overflow: hidden;
-        margin: 0;
-        padding: 0;
-      }
+  <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
 
-      #loading {
-        position: absolute;
-        width: 100%;
-        top: 45%;
-        text-align: center;
-      }
+  <style>
+    html,
+    body {
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
 
-      .nextExpressApp {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
-    </style>
-  </head>
+    #loading {
+      position: absolute;
+      width: 100%;
+      top: 45%;
+      text-align: center;
+    }
 
-  <body>
-    <div id="loading">
-      <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-    </div>
-    <iframe id="nextExpressApp" class="nextExpressApp" frameborder="0"></iframe>
+    .nextExpressApp {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
 
-    <script>
-      const request = require("request");
-      const expressAppUrl = `http://localhost:${process.env.PORT || 3000}`;
+<body>
+  <div id="loading">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+  </div>
+  <iframe id="nextExpressApp" class="nextExpressApp" frameborder="0"></iframe>
 
-      let checkServerRunning = setInterval(() => {
-        request(expressAppUrl, (error, response, body) => {
-          if (!error && response.statusCode == 200) {
-            const app = document.getElementById("nextExpressApp");
-            app.setAttribute("src", expressAppUrl);
-            document.getElementById("loading").style.display = "none";
-            app.style.display = "block";
-            clearInterval(checkServerRunning);
-          }
-        });
-      }, 1000);
-    </script>
-  </body>
+  <script>
+    const request = require("request");
+    const expressAppUrl = `http://localhost:${process.env.PORT || 3000}`;
+
+    let checkServerRunning = setInterval(() => {
+      request(expressAppUrl, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+          const app = document.getElementById("nextExpressApp");
+          app.setAttribute("src", expressAppUrl);
+          document.getElementById("loading").style.display = "none";
+          app.style.display = "block";
+          clearInterval(checkServerRunning);
+        }
+      });
+    }, 1000);
+  </script>
+</body>
+
 </html>

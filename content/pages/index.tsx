@@ -107,14 +107,14 @@ export default function App(props: DefaultProps) {
               <ListItemIcon>
                 <i className="material-icons">book</i>
               </ListItemIcon>
-              <ListItemText primary="barfoo" />
+              <ListItemText primary="menu item #1" />
             </ListItem>
 
             <ListItem button key="foobar">
               <ListItemIcon>
                 <i className="material-icons">info</i>
               </ListItemIcon>
-              <ListItemText primary="foobar" />
+              <ListItemText primary="menu item #2" />
             </ListItem>
           </List>
         </div>
@@ -125,7 +125,7 @@ export default function App(props: DefaultProps) {
         </Typography>
         <br />
         <Typography component="p">
-          This is an Electron app with Next, Express, Socket.IO and TypeScript
+          This is an Electron app with Next.js, Express, Socket.IO and TypeScript
         </Typography>
       </Paper>
     </div>
