@@ -3,21 +3,26 @@
   "description": "Demonstrates spawning Express from Electron and using it to serve content",
   "version": "0.15.0",
   "main": "main.js",
-  "authors": [
-    "Frank Hale <frankhale@gmail.com>"
-  ],
+  "author": "mlengse <anjangkn@gmail.com>",
   "license": "GPL-3.0",
   "private": true,
   "scripts": {
-    "start": ".\\node_modules\\node\\bin\\node.exe start-electron.js"
+    "start": ".\\node_modules\\node\\bin\\node.exe start-electron.js",
+    "package": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron-With-Express\" --asar",
+    "build": "electron-builder --win --x64",
+    "server": "pouchdb-server --host 0.0.0.0 -p 4000 -m -d ./tmp/pouchdb-server/ -n true"
   },
   "dependencies": {
-    "electron": "9.0.4",
+    "electron-packager": "^15.0.0",
     "jquery": "^3.5.1",
     "keymaster": "^1.6.2",
     "lodash": "^4.17.15",
     "node": "^14.4.0",
     "request": "^2.88.2",
     "strip": "^3.0.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^22.8.0",
+    "electron": "9.0.4"
   }
 }
