@@ -13,10 +13,9 @@
     ]
   },
   "scripts": {
-    "start": ".\\node_modules\\node\\bin\\node.exe start-electron.js",
+    "start": "node start-electron.js",
     "package": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=dist\\win-unpacked --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron-With-Express\" --asar",
-    "build": "electron-builder --win --x64",
-    "server": "pouchdb-server --host 0.0.0.0 -p 4000 -m -d ./tmp/pouchdb-server/ -n true"
+    "build": "electron-builder --win --x64"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -29,7 +28,6 @@
     "keymaster": "^1.6.2",
     "lodash": "^4.17.15",
     "morgan": "^1.10.0",
-    "node": "^14.4.0",
     "pouchdb": "^7.2.2",
     "request": "^2.88.2",
     "serve-favicon": "^2.5.0",
