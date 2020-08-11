@@ -6,19 +6,33 @@
   "author": "mlengse <anjangkn@gmail.com>",
   "license": "GPL-3.0",
   "private": true,
+  "build": {
+    "appId": "com.pouchdb.server",
+    "extraFiles": [
+      "db"
+    ]
+  },
   "scripts": {
     "start": ".\\node_modules\\node\\bin\\node.exe start-electron.js",
-    "package": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron-With-Express\" --asar",
+    "package": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=dist\\win-unpacked --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron-With-Express\" --asar",
     "build": "electron-builder --win --x64",
     "server": "pouchdb-server --host 0.0.0.0 -p 4000 -m -d ./tmp/pouchdb-server/ -n true"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.1.1",
     "electron-packager": "^15.0.0",
+    "express": "^4.17.1",
+    "express-pouchdb": "^4.2.0",
     "jquery": "^3.5.1",
     "keymaster": "^1.6.2",
     "lodash": "^4.17.15",
+    "morgan": "^1.10.0",
     "node": "^14.4.0",
+    "pouchdb": "^7.2.2",
     "request": "^2.88.2",
+    "serve-favicon": "^2.5.0",
     "strip": "^3.0.0"
   },
   "devDependencies": {
